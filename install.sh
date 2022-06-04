@@ -4,7 +4,7 @@
 
 cd /Applications/CrossOver.app/Contents/MacOS/
 
-test -f CrossOver.origin && return
+test -f CrossOver.origin && echo 'already installed. exiting...' && exit
 
 mv CrossOver CrossOver.origin
 
