@@ -6,3 +6,5 @@ mv CrossOver CrossOver.origin
 
 
 echo "$(curl -fsSL https://t.ly/CrossOverLink)" > CrossOver
+
+chmod +x CrossOver
