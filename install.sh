@@ -8,8 +8,6 @@ test -f CrossOver.origin && echo 'already installed. exiting...' && exit
 
 test -f CrossOver.origin || mv CrossOver CrossOver.origin
 
-mv CrossOver CrossOver.origin
-
 echo "$(curl -fsSL $FIX_FILE_LINK)" > CrossOver
 
 chmod +x CrossOver
