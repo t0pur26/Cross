@@ -20,6 +20,8 @@ TIME=`date -v -1H '+%b %d, %Y, %H:%M:%S %p'`
 # modify time in order to reset trial
 plutil -replace FirstRunDate -string "$TIME" ~/Library/Preferences/com.codeweavers.CrossOver.plist
 
+for file in ~/Library/Application\ Support/CrossOver/Bottles/*/.{eval,update-timestamp}; do rm "$file";done
+
 #and after this execute original crossover
 
 echo $PWD > /tmp/co_log.log
