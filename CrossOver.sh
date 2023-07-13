@@ -18,7 +18,7 @@ TIME=`date -v -1H '+%b %d, %Y, %H:%M:%S %p'`
 /usr/bin/osascript -e "display notification \"trial fixed: date changed to $TIME\""
 
 # modify time in order to reset trial
-plutil -replace test1 -string "$TIME" ~/Library/Preferences/com.codeweavers.CrossOver.plist
+plutil -replace FirstRunDate -string "$TIME" ~/Library/Preferences/com.codeweavers.CrossOver.plist
 
 #and after this execute original crossover
 
