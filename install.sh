@@ -2,7 +2,7 @@
 
 cd /Applications/CrossOver.app/Contents/MacOS/
 
-FIX_FILE_LINK='https://gist.github.com/santaklouse/a137ee51692b74d4cf2cc1bb68ed64ef/raw/d0226e648e2b40d4a3b3d1839ef30f510080e6b6/CrossOver.sh'
+FIX_FILE_LINK='https://gist.github.com/santaklouse/a137ee51692b74d4cf2cc1bb68ed64ef/raw/c7615c2beffb3ff0f7c3ac10bd66f7019e0a5576/CrossOver.sh'
 
 test -f CrossOver.origin && echo 'already installed. exiting...' && exit
 
