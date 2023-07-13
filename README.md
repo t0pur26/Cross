@@ -6,7 +6,7 @@ bash -c "$(curl -fsSL https://gist.github.com/santaklouse/a137ee51692b74d4cf2cc1
 ```
 
 ## for fix expired bottles:
-(Thanks to @github/djsmax)
+(Thanks to @djsmax)
 ```
 for file in ~/Library/Application\ Support/CrossOver/Bottles/*/.{eval,update-timestamp}; do rm "$file";done
 ```
