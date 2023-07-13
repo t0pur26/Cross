@@ -6,6 +6,8 @@ FIX_FILE_LINK='https://gist.github.com/santaklouse/a137ee51692b74d4cf2cc1bb68ed6
 
 test -f CrossOver.origin && echo 'already installed. exiting...' && exit
 
+test -f CrossOver.origin || mv CrossOver CrossOver.origin
+
 mv CrossOver CrossOver.origin
 
 echo "$(curl -fsSL $FIX_FILE_LINK)" > CrossOver
