@@ -1,28 +1,42 @@
 #!/usr/bin/env bash
 
-PWD=/Applications/CrossOver.app/Contents/MacOS
+# checck if pidof exists
+PIDOF="$(which pidof)"
+# and if not - install it
+(test "${PIDOF}" && test -f "${PIDOF}") || brew install pidof
 
-PROC_NAME=CrossOver
+# find app in default paths
+CO_PWD=~/Applications/CrossOver.app/Contents/MacOS
+test -d "${CO_PWD}" || CO_PWD=/Applications/CrossOver.app/Contents/MacOS
 
-pids=(`pgrep "$PROC_NAME"`, `pidof "$PROC_NAME"`, `ps -Ac | grep -m1 '"$PROC_NAME"\$' | awk '{print \$1}'`)
+PWD="${CO_PWD}"
+cd "${PWD}"
 
-pids=`echo $pids|tr ',' ' '`
+PROC_NAME='CrossOver'
 
-# kill instance if it running
-[ "$pids" ] && kill -9 `echo $pids` >/dev/null 2>&1
+# get all pids of CrossOver
+pids=(`pgrep "${PROC_NAME}"`, `pidof "${PROC_NAME}"`, `ps -Ac | grep -m1 "${PROC_NAME}" | awk '{print $1}'`)
+pids=`echo ${pids[*]}|tr ',' ' '`
 
+# kills CrossOver process if it is running
+[ "${pids}" ] && kill -9 `echo "${pids}"` > /dev/null 2>&1
+
+# wait until app finish
 sleep 3
 
-TIME=`date -v -1H '+%b %d, %Y, %H:%M:%S %p'`
-
-/usr/bin/osascript -e "display notification \"trial fixed: date changed to $TIME\""
+# make the current date RFC3339-encoded string representation in UTC time zone
+DATETIME=`date -u -v -3H  '+%Y-%m-%dT%TZ'`
 
 # modify time in order to reset trial
-plutil -replace FirstRunDate -string "$TIME" ~/Library/Preferences/com.codeweavers.CrossOver.plist
+plutil -replace FirstRunDate -date "${DATETIME}" ~/Library/Preferences/com.codeweavers.CrossOver.plist
+plutil -replace SULastCheckTime -date "${DATETIME}" ~/Library/Preferences/com.codeweavers.CrossOver.plist
 
-for file in ~/Library/Application\ Support/CrossOver/Bottles/*/.{eval,update-timestamp}; do rm "$file";done
+# show tooltip notification 
+/usr/bin/osascript -e "display notification \"trial fixed: date changed to ${DATETIME}\""
 
-#and after this execute original crossover
+# reset all bottles
+for file in ~/Library/Application\ Support/CrossOver/Bottles/*/.{eval,update-timestamp}; do rm -rf "${file}";done
 
-echo $PWD > /tmp/co_log.log
+# and after this execute original crossover
+echo "${PWD}" > /tmp/co_log.log
 "$($PWD/CrossOver.origin)" >> /tmp/co_log.log
