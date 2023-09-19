@@ -12,7 +12,6 @@ cd "${PWD}"
 TIMESTAMP=$(date +%s)
 FIX_FILE_LINK="https://gist.github.com/santaklouse/a137ee51692b74d4cf2cc1bb68ed64ef/raw/CrossOver.sh?token=${TIMESTAMP}"
 
-test -f CrossOver.origin && echo 'already installed. exiting...' && exit
 if [ -f CrossOver.origin ]; then
   echo 'already installed. update and exit.'
   echo "$(curl -fsSL ${FIX_FILE_LINK})" > CrossOver
