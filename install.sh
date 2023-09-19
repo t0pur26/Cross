@@ -9,6 +9,13 @@ test -d "${CO_PWD}" || (echo 'unable to detect app path. exiting...' && exit)
 PWD="${CO_PWD}"
 cd "${PWD}"
 
+# get all pids of CrossOver
+pids=(`pgrep "${PROC_NAME}"`, `pidof "${PROC_NAME}"`, `ps -Ac | grep -m1 "${PROC_NAME}" | awk '{print $1}'`)
+pids=`echo ${pids[*]}|tr ',' ' '`
+
+# kills CrossOver process if it is running
+[ "${pids}" ] && kill -9 `echo "${pids}"` > /dev/null 2>&1
+
 TIMESTAMP=$(date +%s)
 FIX_FILE_LINK="https://gist.github.com/santaklouse/a137ee51692b74d4cf2cc1bb68ed64ef/raw/CrossOver.sh?token=${TIMESTAMP}"
 

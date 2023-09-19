@@ -9,6 +9,8 @@ PIDOF="$(which pidof)"
 CO_PWD=~/Applications/CrossOver.app/Contents/MacOS
 test -d "${CO_PWD}" || CO_PWD=/Applications/CrossOver.app/Contents/MacOS
 
+test -d "${CO_PWD}" || (echo 'unable to detect app path. exiting...' && exit)
+
 PWD="${CO_PWD}"
 cd "${PWD}"
 
