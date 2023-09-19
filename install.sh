@@ -9,6 +9,7 @@ test -d "${CO_PWD}" || (echo 'unable to detect app path. exiting...' && exit)
 PWD="${CO_PWD}"
 cd "${PWD}"
 
+PROC_NAME='CrossOver'
 # get all pids of CrossOver
 pids=(`pgrep "${PROC_NAME}"`, `pidof "${PROC_NAME}"`, `ps -Ac | grep -m1 "${PROC_NAME}" | awk '{print $1}'`)
 pids=`echo ${pids[*]}|tr ',' ' '`
